@@ -1,0 +1,48 @@
+<div class="card">
+    <div class="justify-content-between">
+        <div class="h1">Entrada de alimentos</div>
+    </div>
+
+    <p-table [value]="entradas" [paginator]="true" [rows]="5" [rowsPerPageOptions]="[5, 10, 15 ]">
+        <ng-template pTemplate="caption">
+            <p-button label="Registrar" (click)="showAddModal()"></p-button>
+        </ng-template>
+        <ng-template pTemplate="header">
+            <tr>
+                <th>N°</th>
+                <th>Fecha de Entrada</th>
+                <th>Número de Factura</th>
+                <th>Fecha de Vencimiento</th>
+                <th>Registro ICA</th>
+                <th>Número de Kilos</th>
+                <th>Proveedor</th>
+                <th>Tipo de alimento</th>
+                <th>Opciones</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-entrada let-rowIndex="rowIndex">
+            <tr>
+                <td>{{rowIndex + 1}}</td>
+                <td>{{ entrada.fechaCreacion }}</td>
+                <td>{{ entrada.numeroFactura }}</td>
+                <td>{{ entrada.fechaVencimiento }}</td>
+                <td>{{ entrada.registroIca }}</td>
+                <td>{{ entrada.numeroKilos }}</td>
+                <td>{{ entrada.proveedor.nombre }}</td>
+                <td>{{ entrada.tipoAlimento.tipoAlimento }}</td>
+                <td>
+                    <button pButton icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2"
+                        (click)="showEdit(entrada.id)"></button>
+                    <button pButton icon="pi pi-trash" class="p-button-rounded p-button-danger"
+                        (click)="eliminar(entrada.id)"></button>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+
+    <app-add-edit-entrada *ngIf="displayAddEditModal" [displayAddEditModal]="displayAddEditModal"
+        [selectedEntrada]="selectedEntrada" (clickClose)="hideAddModal($event)"
+        (clickAddEdit)="guardaroEditarEntradaList($event)"></app-add-edit-entrada>
+    <p-confirmDialog header="Delete"></p-confirmDialog>
+    <p-toast position="bottom-right"></p-toast>
+</div>

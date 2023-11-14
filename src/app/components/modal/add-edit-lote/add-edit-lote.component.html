@@ -1,0 +1,64 @@
+<p-dialog header="{{modalType}}Lote" [(visible)]="displayAddEditModal" [modal]="true" [draggable]="false"
+    [resizable]="false" (onHide)="closeModal()">
+    <form [formGroup]="form" class="lote-form">
+
+        <div class="row">
+            <div class="field">
+                <label class="block" for="nombreLote">Nombre Lote</label>
+                <input type="text" pInputText id="nombreLote" formControlName="nombreLote">
+                <small class="p-error block" *ngIf="
+                form.controls['nombreLote'].invalid &&
+                form.controls['nombreLote'].dirty
+                ">Campo Obligatorio*</small>
+            </div>
+
+            <div class="field">
+                <label class="block" for="fechaSiembra">Fecha de Siembra</label>
+                <input type="date" pInputText id="fechaSiembra" formControlName="fechaSiembra">
+                <small class="p-error block" *ngIf="
+                    form.controls['fechaSiembra'].invalid &&
+                    form.controls['fechaSiembra'].dirty
+                    ">Campo Obligatorio*</small>
+            </div>
+
+            <div class="field">
+                <label class="block" for="numeroAnimales">Numero de Animales</label>
+                <input name="numeroAnimales" type="text" pInputText id="numeroAnimales"
+                    formControlName="numeroAnimales">
+                <small class="p-error block" *ngIf="
+                    form.controls['numeroAnimales'].invalid &&
+                    form.controls['numeroAnimales'].dirty
+                    ">Campo Obligatorio*</small>
+            </div>
+        
+            <div class="field">
+                <label for="proveedor">Proveedor</label>
+                <select name="proveedor" type="text" formControlName="proveedor">
+                    <option>Seleccionar una Opcion</option>
+                    <option *ngFor="let proveedor of proveedores" [value]="proveedor.id">{{proveedor.razonSocial}}</option>
+                </select>
+            </div>
+
+            <div class="field">
+                <label for="especies">Especies</label>
+                <select name="especies" type="text" formControlName="especies">
+                    <option>Seleccionar una Opcion</option>
+                    <option *ngFor="let especie of especies" [value]="especie.id">{{especie.nombreEspecie}}</option>
+                </select>
+            </div>
+        
+            <div class="field">
+                <label for="unidadProductiva">Unidad Productiva</label>
+                <select class="select" name="unidadProductiva" type="text" formControlName="unidadProductiva">
+                    <option>Seleccionar una Opcion</option>
+                    <option *ngFor="let unidadP of unidadProductiva" [value]="unidadP.id">{{unidadP.nombreUnidadP}}</option>
+                </select>
+            </div>
+        </div>
+
+    </form>
+    <ng-template pTemplate="footer">
+        <p-button (click)="closeModal()" label="Cancel" styleClass="p-button-text"></p-button>
+        <p-button (click)="addEditLote()" label="{{modalType}}" [disabled]="form.invalid"></p-button>
+    </ng-template>
+</p-dialog>

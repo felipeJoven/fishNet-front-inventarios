@@ -1,0 +1,44 @@
+<div class="card">
+    <div class="justify-content-between">
+        <div class="h1">Salida de alimentos</div>
+    </div>
+
+    <p-table [value]="salidas" [paginator]="true" [rows]="5" [rowsPerPageOptions]="[5, 10, 15 ]">
+        <ng-template pTemplate="caption">
+            <p-button label="Registrar" (click)="showAddModal()"></p-button>
+        </ng-template>
+        <ng-template pTemplate="header">
+            <tr>
+                <th>N°</th>
+                <th>Fecha de Salida</th>
+                <th>Número de Factura</th>                                
+                <th>Número de Kilos</th>
+                <th>Tipo de alimento</th>
+                <th>Lote</th>
+                <th>Opciones</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-salida let-rowIndex="rowIndex">
+            <tr>
+                <td>{{rowIndex + 1}}</td>
+                <td>{{ salida.fechaCreacion }}</td>
+                <td>{{ salida.numeroFactura }}</td>                                
+                <td>{{ salida.numeroKilos }}</td>
+                <td>{{ salida.tipoAlimento.tipoAlimento }}</td>
+                <td>{{ salida.lote.nombreLote }}</td>                
+                <td>
+                    <button pButton icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2"
+                        (click)="showEdit(salida.id)"></button>
+                    <button pButton icon="pi pi-trash" class="p-button-rounded p-button-danger"
+                        (click)="eliminar(salida.id)"></button>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+
+    <app-add-edit-salida *ngIf="displayAddEditModal" [displayAddEditModal]="displayAddEditModal"
+        [selectedSalida]="selectedSalida" (clickClose)="hideAddModal($event)"
+        (clickAddEdit)="guardaroEditarSalidaList($event)"></app-add-edit-salida>
+    <p-confirmDialog header="Delete"></p-confirmDialog>
+    <p-toast position="bottom-right"></p-toast>
+</div>

@@ -1,0 +1,101 @@
+<p-dialog header="{{modalType}} Proveedor" [(visible)]="displayAddEditModal" [modal]="true" [draggable]="false"
+    [resizable]="false" (onHide)="closeModal()">
+    <form [formGroup]="form" class="proveedor-form">
+
+        <div class="row">
+            <div class="field">
+                <label class="block" for="nombre">Nombre</label>
+                <input type="text" pInputText id="nombre" formControlName="nombre">
+                <small class="p-error block" *ngIf="
+                form.controls['nombre'].invalid &&
+                form.controls['nombre'].dirty
+                ">Campo Obligatorio*</small>
+            </div>
+
+            <div class="field">
+                <label class="block" for="apellido">Apellido</label>
+                <input name="apellido" type="text" pInputText id="apellido" formControlName="apellido">
+                <small class="p-error block" *ngIf="
+                    form.controls['apellido'].invalid &&
+                    form.controls['apellido'].dirty
+                    ">Campo Obligatorio*</small>
+            </div>
+
+            <div class="field">
+                <label class="block" for="telefono">Teléfono</label>
+                <input name="telefono" type="text" pInputText id="telefono" formControlName="telefono">
+                <small class="p-error block" *ngIf="
+                    form.controls['telefono'].invalid &&
+                    form.controls['telefono'].dirty
+                    ">Campo Obligatorio*</small>
+            </div>
+
+            <div class="field">
+                <label class="block" for="direccion">Dirección</label>
+                <input type="text" pInputText id="direccion" formControlName="direccion">
+                <small class="p-error block" *ngIf="
+                    form.controls['direccion'].invalid &&
+                    form.controls['direccion'].dirty
+                    ">Campo Obligatorio*</small>
+            </div>
+
+            <div class="field">
+                <label class="block" for="correo">Correo</label>
+                <input class="lg" type="text" pInputText id="correo" formControlName="correo">
+                <small class="p-error block" *ngIf="
+                    form.controls['correo'].invalid &&
+                    form.controls['correo'].dirty
+                    ">Campo Obligatorio*</small>
+            </div>
+
+            <div class="field">
+                <label class="block" for="razonSocial">Razón Social</label>
+                <input type="text" pInputText id="razonSocial" formControlName="razonSocial">
+                <small class="p-error block" *ngIf="
+                    form.controls['razonSocial'].invalid &&
+                    form.controls['razonSocial'].dirty
+                    ">Campo Obligatorio*</small>
+            </div>
+
+            <div class="field">
+                <label class="block" for="tipoIdentificacion">Tipo Identificacion</label>
+                <select class="select" name="tipoIdentificacion" type="text" formControlName="tipoIdentificacion">
+                    <option>Seleccionar una Opcion</option>
+                    <option *ngFor="let tipoId of tipoIdentificacion" [value]="tipoId.id">
+                        {{tipoId.tipoIdentificacion}}
+                    </option>
+                </select>
+                <small class="p-error block" *ngIf="
+                    form.controls['tipoIdentificacion'].invalid &&
+                    form.controls['tipoIdentificacion'].dirty
+                    ">Campo Obligatorio*</small>
+            </div>
+
+            <div class="field">
+                <label class="block" for="numeroIdentificacion">Número de Identificacion</label>
+                <input type="text" pInputText formControlName="numeroIdentificacion">
+                <small class="p-error block" *ngIf="
+                    form.controls['numeroIdentificacion'].invalid &&
+                    form.controls['numeroIdentificacion'].dirty
+                    ">Campo Obligatorio*</small>
+            </div>
+
+            <div class="field">
+                <label class="block" for="tipoProveedor">Tipo de Proveedor</label>
+                <select class="select" name="tipoProveedor" type="text" formControlName="tipoProveedor">
+                    <option>Seleccionar una Opcion</option>
+                    <option *ngFor="let tipoproveedor of tipoProveedor" [value]="tipoproveedor.id">
+                        {{tipoproveedor.tipoProveedor}}</option>
+                </select>
+                <small class="p-error block" *ngIf="
+                    form.controls['tipoProveedor'].invalid &&
+                    form.controls['tipoProveedor'].dirty
+                    ">Campo Obligatorio*</small>
+            </div>
+        </div>
+    </form>
+    <ng-template pTemplate="footer">
+        <p-button (click)="closeModal()" label="Cancel" styleClass="p-button-text"></p-button>
+        <p-button (click)="addEditProveedor()" label="{{modalType}}" [disabled]="form.invalid"></p-button>
+    </ng-template>
+</p-dialog>
